@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ChatAnimation from '@/components/ChatAnimation.vue'
+</script>
 
 <template>
-  <main></main>
+  <main>
+    <ChatAnimation />
+  </main>
 </template>
