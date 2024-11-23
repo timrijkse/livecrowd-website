@@ -37,7 +37,19 @@ const toggleOpen = () => {
     <div class="background" :style="{ height: headerHeight + 'px' }"></div>
     <div class="header-content">
       <Logo />
+
       <IconHamburger :is-open="isOpen" @click="toggleOpen" class="header-hamburger" />
+
+      <nav class="header-nav-desktop">
+        <ul>
+          <li v-for="item in navigationItems" :key="item.label">
+            <a @click="toggleOpen" :href="item.href">
+              {{ item.label }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+
       <ButtonHelp class="header-button-help" />
     </div>
 
@@ -101,9 +113,13 @@ const toggleOpen = () => {
   overflow: hidden;
   align-items: center;
   justify-content: space-between;
-  width: 100vw;
+  max-width: 100vw;
   padding: 16px var(--site-padding);
   z-index: 2;
+}
+
+.header-nav-desktop {
+  display: none;
 }
 
 .header-nav {
@@ -125,7 +141,7 @@ const toggleOpen = () => {
   margin-bottom: 8px;
 }
 
-.header-nav a {
+.header a {
   overflow: hidden;
   display: block;
   text-decoration: none;
@@ -142,5 +158,49 @@ const toggleOpen = () => {
 
 .open .header-nav a span {
   transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .header-content {
+    justify-content: space-between;
+  }
+
+  .header-hamburger {
+    display: none;
+  }
+
+  .header-nav-desktop {
+    display: block;
+  }
+
+  .header-nav-desktop ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+  }
+
+  .header-nav-desktop li {
+    margin: 0 24px;
+  }
+
+  .header-nav-desktop a {
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .header-nav-desktop a:hover {
+    text-decoration: underline;
+  }
+
+  .header-nav {
+    display: none;
+  }
+
+  .header-button-help {
+    position: relative;
+    right: auto;
+  }
 }
 </style>
